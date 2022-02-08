@@ -36,10 +36,10 @@ public class TestGrpc {
     static {
         listOfLibs = new ArrayList<>();
         listOfLibs.add(STUBS_IMPL);
-        listOfLibs.add(PROTOBUF);
-        listOfLibs.add(IO_GRPC_API);
-        listOfLibs.add(IO_GRPC_STUB);
-        listOfLibs.add(PROTOBUF_JAVA_UTIL);
+//        listOfLibs.add(PROTOBUF);
+//        listOfLibs.add(IO_GRPC_API);
+//        listOfLibs.add(IO_GRPC_STUB);
+//        listOfLibs.add(PROTOBUF_JAVA_UTIL);
     }
 
     @Deployment
@@ -56,7 +56,6 @@ public class TestGrpc {
     @RunAsClient
     public void testGrpc() throws InterruptedException {
         executeRouteGuideClient(null);
-        Assert.assertTrue(true);
     }
 
     public static void executeRouteGuideClient(String clientId) throws InterruptedException {
@@ -95,7 +94,7 @@ public class TestGrpc {
             CountDownLatch finishLatch = client.routeChat();
 
             if (!finishLatch.await(1, TimeUnit.MINUTES)) {
-                LogHelper.warning(clientIdPrefix + "routeChat can not finish within 1 minutes");
+               throw new AssertionError(clientIdPrefix + "routeChat can not finish within 1 minutes");
             }
 
         } finally {

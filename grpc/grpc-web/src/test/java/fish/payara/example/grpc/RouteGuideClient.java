@@ -45,8 +45,7 @@ public class RouteGuideClient {
 
         } catch (StatusRuntimeException e) {
             LogHelper.warning(clientPrefix+"RPC failed: {0}", e.getStatus());
-
-            return;
+            throw e;
         }
         if (routeGuideUtil.exists(feature)) {
             LogHelper.info(clientPrefix+"Found feature called \"{0}\" at {1}, {2}",
@@ -82,7 +81,7 @@ public class RouteGuideClient {
             }
         } catch (StatusRuntimeException e) {
             LogHelper.warning(clientPrefix+"RPC failed: {0}", e.getStatus());
-
+            throw e;
         }
     }
 
